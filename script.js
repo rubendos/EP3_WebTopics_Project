@@ -20,10 +20,10 @@ function staticLoadPlaces() {
 
 var creatures = [
     {
-        url: 'pad naar model',
+        url: '/assets/bird/scene.gltf',
         scale: '0.5 0.5 0.5',
         rotation: '0 180 0',
-        info: 'info',
+        info: 'Bird',
     },
     {
         url: 'pad naar model',
