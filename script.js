@@ -1,6 +1,6 @@
 window.onload = () => {
     const button = document.querySelector('button[="next"]');
-    button.innerText = 'Next Creature';
+    button.innerText = 'Next';
 
     let places = staticLoadPlaces();
     renderPlaces(places);
