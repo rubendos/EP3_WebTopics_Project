@@ -1,6 +1,7 @@
+
 window.onload = () => {
-    const button = document.getElementById('nextButton');
-    button.innerText = 'Next';
+    const button = document.querySelector('button[data-action="change"]');
+    button.innerText = '﹖';
 
     let places = staticLoadPlaces();
     renderPlaces(places);
@@ -9,78 +10,78 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: 'Huis Ruben',
+            name: 'Pokèmon',
             location: {
-                latitude: 50.840149,
-                longitude: 4.072250,
+                // decomment the following and add coordinates:
+                // lat: <your-latitude>,
+                // lng: <your-longitude>,
             },
         },
     ];
 }
 
-var creatures = [
+var models = [
     {
-        url: './assets/bird/scene.gltf',
-        scale: '0.2 0.2 0.2',
-        rotation: '0 0 0',
-        info: 'Bird',
+        url: './assets/magnemite/scene.gltf',
+        scale: '0.5 0.5 0.5',
+        info: 'Magnemite, Lv. 5, HP 10/10',
+        rotation: '0 180 0',
     },
     {
-        url: './assets/cockatoo/scene.gltf',
+        url: './assets/articuno/scene.gltf',
         scale: '0.2 0.2 0.2',
-        rotation: '0 0 0',
-        info: 'Cockatoo',
+        rotation: '0 180 0',
+        info: 'Articuno, Lv. 80, HP 100/100',
     },
     {
-        url: './assets/deer/scene.gltf',
-        scale: '0.2 0.2 0.2',
-        rotation: '0 0 0',
-        info: 'Deer',
+        url: './assets/dragonite/scene.gltf',
+        scale: '0.08 0.08 0.08',
+        rotation: '0 180 0',
+        info: 'Dragonite, Lv. 99, HP 150/150',
     },
 ];
 
-var creatureIndex = 0;
-var setCreatures = function (creature, entity) {
-    if (creature.scale) {
-        entity.setAttribute('scale', creature.scale);
+var modelIndex = 0;
+var setModel = function (model, entity) {
+    if (model.scale) {
+        entity.setAttribute('scale', model.scale);
     }
 
-    if (creature.rotation) {
-        entity.setAttribute('rotation', creature.rotation);
+    if (model.rotation) {
+        entity.setAttribute('rotation', model.rotation);
     }
 
-    if (creature.position) {
-        entity.setAttribute('position', creature.position);
+    if (model.position) {
+        entity.setAttribute('position', model.position);
     }
 
-    entity.setAttribute('gltf-model', creature.url);
+    entity.setAttribute('gltf-model', model.url);
 
-    const div = document.getElementById('info');
-    div.innerText = creature.info;
+    const div = document.querySelector('.instructions');
+    div.innerText = model.info;
 };
 
 function renderPlaces(places) {
     let scene = document.querySelector('a-scene');
 
     places.forEach((place) => {
-        let latitude = place.location.latitude;
-        let longitude = place.location.longitude;
+        let latitude = place.location.lat;
+        let longitude = place.location.lng;
 
-        let creature = document.createElement('a-entity');
-        creature.setAttribute('look-at', '[gps-camera]');
-        creature.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        let model = document.createElement('a-entity');
+        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
 
-        setCreatures(creatures[creatureIndex], creature);
+        setModel(models[modelIndex], model);
 
-        creature.setAttribute('animation-mixer', '');
+        model.setAttribute('animation-mixer', '');
 
-        document.getElementById('nextButton').addEventListener('click', function () {
+        document.querySelector('button[data-action="change"]').addEventListener('click', function () {
             var entity = document.querySelector('[gps-entity-place]');
-            creatureIndex++;
-            var newIndex = creatureIndex % creatures.length;
-            setCreatures(creatures[newIndex], entity);
+            modelIndex++;
+            var newIndex = modelIndex % models.length;
+            setModel(models[newIndex], entity);
         });
 
-        scene.appendChild(creature);
+        scene.appendChild(model);
     });
 }
