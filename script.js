@@ -1,5 +1,5 @@
 window.onload = () => {
-    const button = document.querySelector('button[="next"]');
+    const button = document.getElementById('nextButton');
     button.innerText = 'Next';
 
     let places = staticLoadPlaces();
