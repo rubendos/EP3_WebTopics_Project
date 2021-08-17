@@ -20,22 +20,22 @@ function staticLoadPlaces() {
 
 var creatures = [
     {
-        url: '/assets/bird/scene.gltf',
-        scale: '0.4 0.4 0.4',
-        rotation: '0 180 0',
+        url: './assets/bird/scene.gltf',
+        scale: '0.2 0.2 0.2',
+        rotation: '0 0 0',
         info: 'Bird',
     },
     {
-        url: 'pad naar model',
+        url: './assets/cockatoo/scene.gltf',
         scale: '0.2 0.2 0.2',
-        rotation: '0 180 0',
-        info: 'info',
+        rotation: '0 0 0',
+        info: 'Cockatoo',
     },
     {
-        url: 'pad naar model',
-        scale: '0.08 0.08 0.08',
-        rotation: '0 180 0',
-        info: 'info',
+        url: './assets/deer/scene.gltf',
+        scale: '0.2 0.2 0.2',
+        rotation: '0 0 0',
+        info: 'Deer',
     },
 ];
 
@@ -67,6 +67,7 @@ function renderPlaces(places) {
         let longitude = place.location.longitude;
 
         let creature = document.createElement('a-entity');
+        creature.setAttribute('look-at', '[gps-camera]');
         creature.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
 
         setCreatures(creatures[creatureIndex], creature);
