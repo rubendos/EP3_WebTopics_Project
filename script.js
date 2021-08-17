@@ -21,7 +21,7 @@ function staticLoadPlaces() {
 var creatures = [
     {
         url: '/assets/bird/scene.gltf',
-        scale: '0.5 0.5 0.5',
+        scale: '0.4 0.4 0.4',
         rotation: '0 180 0',
         info: 'Bird',
     },
@@ -40,7 +40,7 @@ var creatures = [
 ];
 
 var creatureIndex = 0;
-var setCreatures = function (creatures, entity) {
+var setCreatures = function (creature, entity) {
     if (creature.scale) {
         entity.setAttribute('scale', creature.scale);
     }
@@ -55,7 +55,7 @@ var setCreatures = function (creatures, entity) {
 
     entity.setAttribute('gltf-model', creature.url);
 
-    const div = document.querySelector('.instructions');
+    const div = document.getElementById('info');
     div.innerText = creature.info;
 };
 
@@ -66,20 +66,20 @@ function renderPlaces(places) {
         let latitude = place.location.latitude;
         let longitude = place.location.longitude;
 
-        let model = document.createElement('a-entity');
-        model.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
+        let creature = document.createElement('a-entity');
+        creature.setAttribute('gps-entity-place', `latitude: ${latitude}; longitude: ${longitude};`);
 
-        setModel(creatures[creatureIndex], creature);
+        setCreatures(creatures[creatureIndex], creature);
 
-        model.setAttribute('animation-mixer', '');
+        creature.setAttribute('animation-mixer', '');
 
-        document.querySelector('button[data-action="next"]').addEventListener('click', function () {
+        document.getElementById('nextButton').addEventListener('click', function () {
             var entity = document.querySelector('[gps-entity-place]');
             creatureIndex++;
             var newIndex = creatureIndex % creatures.length;
-            setModel(creatures[newIndex], entity);
+            setCreatures(creatures[newIndex], entity);
         });
 
-        scene.appendChild(model);
+        scene.appendChild(creature);
     });
 }
