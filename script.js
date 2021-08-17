@@ -1,7 +1,7 @@
 
 window.onload = () => {
     const button = document.querySelector('button[data-action="change"]');
-    button.innerText = 'Next';
+    button.innerText = '﹖';
 
     let places = staticLoadPlaces();
     renderPlaces(places);
@@ -10,10 +10,10 @@ window.onload = () => {
 function staticLoadPlaces() {
     return [
         {
-            name: 'Huis Rubenw',
+            name: 'Huis Ruben',
             location: {
-                 lat: 50.840150,
-                 lng: 4.072250,
+                lat: 50.840150,
+                lng: 4.072250,
             },
         },
     ];
@@ -23,7 +23,7 @@ var models = [
     {
         url: './assets/magnemite/scene.gltf',
         scale: '0.5 0.5 0.5',
-        info: 'Magnemite, HP 20/10',
+        info: 'Magnemite, HP 20/20',
         rotation: '0 180 0',
     },
     {
@@ -36,7 +36,7 @@ var models = [
         url: './assets/dragonite/scene.gltf',
         scale: '0.08 0.08 0.08',
         rotation: '0 180 0',
-        info: 'Dragonite, HP 150/150',
+        info: 'Dragonite, HP 200/200',
     },
 ];
 
